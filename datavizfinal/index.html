@@ -1,10 +1,22 @@
 <html>
     <body>
-        <button class="sheetswitch" id = "toSheet1" value="0">Sheet1</button>
-        <button class="sheetswitch" id = "toSheet2" value="1">Sheet2</button>
-        <button class="sheetswitch" id = "toSheet3" value="2">Sheet3</button>
-        <button class="sheetswitch" id = "toSheet4" value="3">Sheet4</button>
-        <div id = "displaydiv"></div>
+        <div align=center style="size: 30px">Tendencies Revealed Through Visualizing Health Data</div>
+        <div align=center>
+            <div>
+                <button class="sheetswitch" id = "toSheet1" value="0">Blood Glucose Gap</button>
+                <!-- <button class="sheetswitch" id = "toSheet2" value="1">Prevalence of Disease Around the Gap</button> -->
+                <button id="showDiseases">Show Diseases</button>
+                <button id="hideDiseases">Hide Diseases</button>
+
+            </div>
+            <div>
+                <button class="sheetswitch" id = "toSheet3" value="2">Dangers of High Creatinine</button>
+                <button class="sheetswitch" id = "toSheet4" value="3">New Criteria for Disease Risk</button>
+            </div>
+            
+        </div>
+        
+        <div id = "displaydiv" style="width:20" style="display:block"></div>
         <div justify:center>
             <div padding-left:10></div>
             <div id = "sheet1" align=center>
@@ -13,11 +25,11 @@
                     However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
                 
             </div>
-            <div id = "sheet2" style="display:none" align=center >
+            <!-- <div id = "sheet2" style="display:none" align=center >
                 <div>This graph plots patients bmi values with respect to their age.
                     We can see that the red and blue points, denoting heart disease and hyptertension respectively, are more prevalent in older patients.
                     However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
-            </div>
+            </div> -->
             <div id = "sheet3" style="display:none" align=center display:none></div>
             <div id = "sheet4" style="display:none" align=center display:none></div>
         </div>
