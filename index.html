@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <button class="sheetswitch" id = "toSheet1" value="0">Sheet1</button>
+        <button class="sheetswitch" id = "toSheet2" value="1">Sheet2</button>
+        <button class="sheetswitch" id = "toSheet3" value="2">Sheet3</button>
+        <button class="sheetswitch" id = "toSheet4" value="3">Sheet4</button>
+        <div id = "displaydiv"></div>
+        <div justify:center>
+            <div padding-left:10></div>
+            <div id = "sheet1" align=center>
+                <div>This graph plots patients' blood glucose levels with respect to their age.
+                    We can see that the red and blue points, denoting heart disease and hyptertension respectively, are more prevalent in older patients.
+                    However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
+                
+            </div>
+            <div id = "sheet2" align=center >
+                <div>This graph plots patients bmi values with respect to their age.
+                    We can see that the red and blue points, denoting heart disease and hyptertension respectively, are more prevalent in older patients.
+                    However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
+            </div>
+            <div id = "sheet3" align=center display:none></div>
+            <div id = "sheet4" align=center display:none></div>
+        </div>
+        <script src="https://d3js.org/d3.v7.js"></script>
+        <!-- https://cdnjs.com/libraries/d3-annotation -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js" integrity="sha512-iBAeBWWWFb8HqSBcrqcz98iIpuVH1la39dEYHtyQ/pGpeCQTQVvLJOWAuhv2Q7JSHp9k7hWA7sGxU3hHJe+tFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="index.js"></script>
+    </body>
+   
+    
+</html>
