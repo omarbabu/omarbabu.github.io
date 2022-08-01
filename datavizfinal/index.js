@@ -67,18 +67,6 @@ d3.csv("full_data.csv").then( function(data) {
 
     //end first chart
     
-    const annotations = [
-        {
-            note: { label: "Hi" },
-            x: 100,
-            y: 100,
-            dy: 137,
-            dx: 162,
-            subject: { radius: 50, radiusPadding: 10 },
-        },
-    ];
-
-    d3.annotation().annotations(annotations);
     //SECOND CHART
     xScale = d3.scaleLinear().domain([0,90]).range([0,width]);
     yScale = d3.scaleLinear().domain([40,300]).range([height, 0]);
@@ -90,7 +78,9 @@ d3.csv("full_data.csv").then( function(data) {
         .attr("cy", function(d) {return yScale(d.avg_glucose_level)})
         .attr("r", 2)
         .style("fill", function(d) {
-            if (d.avg_glucose_level < 170 && d.avg_glucose_level > 120) return "lightgreen";
+            if (d.avg_glucose_level < 140) return "#CEBACF";
+            else if (d.avg_glucose_level < 190) return "#B0A3D4";
+            else return "#7D80DA";
             if (d.stroke == 1) return 'red';
             // if (d.heart_disease == 1 && d.hypertension == 1) return "lightgreen";
             // else if (d.heart_disease == 1) return "#F05365";
@@ -104,10 +94,49 @@ d3.csv("full_data.csv").then( function(data) {
     sheet1.selectAll("circle")
         .transition()
         .delay(function(d,i) {return(i*2)})
-        .duration(1500)
+        .duration(100)
         .attr("cx", function (d) { return xScale(d.age) });
 
-    
+// https://d3-graph-gallery.com/graph/custom_annotation.html
+// Features of the annotation
+const annotations = [
+    {
+      note: {
+        label: "We see a clear gap in patients with blood glucose levels 120-140. From the data, the patients patients in this group seem less prone to disease.",
+        title: "The Gap"
+      },
+      x: xScale(75),
+      y: yScale(140),
+      dy: -20,
+      dx: 30
+    },
+    {
+        note: {
+            label: "Heart Disease",
+            title: "Red"
+          },
+          x: xScale(82),
+          y: yScale(57),
+          dy: -20,
+          dx: 30
+    },
+    {
+        note: {
+            label: "Hypertension",
+            title: "Blue"
+          },
+          x: xScale(42),
+          y: yScale(77),
+          dy: 10,
+          dx: 30
+    }
+  ]
+  // Add annotation to the chart
+  const makeAnnotations = d3.annotation()
+    .annotations(annotations)
+  sheet1
+    .append("g")
+    .call(makeAnnotations)
 //end second chart
 
 });
@@ -118,10 +147,13 @@ function showDiseases() {
         .transition()
         .duration(1500)
         .style("fill", function(d) {
-            if (d.stroke == 1) return "black";
-            else if (d.heart_disease == 1) return "red";
+            if (d.heart_disease == 1) return "red";
             else if (d.hypertension == 1) return "blue";
             else return this.style.fill;
+        })
+        .attr("r", function(d) {
+            if (d.heart_disease == 1 || d.hypertension == 1) return 10;
+            else return this.attr.fill;
         });
 }
 function hideDiseases() {
@@ -130,10 +162,11 @@ function hideDiseases() {
         .transition()
         .duration(1500)
         .style("fill", function(d) {
-            if (d.avg_glucose_level < 170 && d.avg_glucose_level > 120) return "lightgreen";
-            if (d.stroke == 1) return 'red';
-            else return "#F5ECCD";
-        });
+            if (d.avg_glucose_level < 140) return "#CEBACF";
+            else if (d.avg_glucose_level < 190) return "#B0A3D4";
+            else return "#7D80DA";
+        })
+        .attr("r", 2);
 }
 document.querySelector("#showDiseases").addEventListener("click", showDiseases);
 document.querySelector("#hideDiseases").addEventListener("click", hideDiseases);
