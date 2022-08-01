@@ -87,9 +87,11 @@ d3.csv("full_data.csv").then( function(data) {
         .attr("cy", function(d) {return yScale(d.bmi)})
         .attr("r", 2)
         .style("fill", function(d) {
-            if (d.heart_disease == 1 && d.hypertension == 1) return "lightgreen";
-            else if (d.heart_disease == 1) return "#F05365";
-            else if (d.hypertension == 1) return "#1B065E";
+            // if (d.avg_glucose_level < 170 && d.avg_glucose_level > 120) return "lightgreen";
+            if(d.stroke == 1) return 'red';
+            // if (d.heart_disease == 1 && d.hypertension == 1) return "lightgreen";
+            // else if (d.heart_disease == 1) return "#F05365";
+            // else if (d.hypertension == 1) return "#1B065E";
             else return "#F5ECCD";
         })
         .style("opacity", 0.8);
@@ -103,36 +105,38 @@ d3.csv("full_data.csv").then( function(data) {
     
 //end second chart
 
-//THIRD CHART
-xScale = d3.scaleLinear().domain([0,60]).range([0,width]);
-yScale = d3.scaleLinear().domain([40,300]).range([height, 0]);
-sheet3.append("g").call(d3.axisLeft(yScale));
-sheet3.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+0+", "+height+")");
-//initially, color by court surface and plot in a line
-sheet3.append("g").selectAll("dot").data(data).enter().append("circle")
-    .attr("cx", function(d,i) {return width})
-    .attr("cy", function(d) {return yScale(d.avg_glucose_level)})
-    .attr("r", 2)
-    .style("fill", function(d) {
-        var smoke = d.smoking_status;
-        // if (smoke == "never smoked") return "pink";
-        // else if (smoke == "formerly smoked") return "grey";
-        // if (smoke == "smokes") return "red";
-        return "#F5ECCD";
-    });
-//then, points travel to their location on the x axis
-sheet3.selectAll("circle")
-    .transition()
-    .delay(function(d,i) {return(i*2)})
-    .duration(1500)
-    .attr("cx", function (d) { return xScale(d.bmi)});
-
-
-//end third chart
-
 });
 
 d3.csv("heart_failure_clinical_records_dataset.csv").then(function(data) {
+    
+    //THIRD CHART
+    xScale = d3.scaleLinear().domain([113,148]).range([0,width]);
+    yScale = d3.scaleLinear().domain([0,10]).range([height, 0]);
+    sheet3.append("g").call(d3.axisLeft(yScale));
+    sheet3.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+0+", "+height+")");
+    //initially, color by court surface and plot in a line
+    sheet3.append("g").selectAll("dot").data(data).enter().append("circle")
+        .attr("cx", function(d,i) {return width})
+        .attr("cy", function(d) {return yScale(d.serum_creatinine)})
+        .attr("r", 2)
+        .style("fill", function(d) {
+            // var smoke = d.smoking_status;
+            // if (smoke == "never smoked") return "pink";
+            // else if (smoke == "formerly smoked") return "grey";
+            // if (smoke == "smokes") return "red";
+            if (d.high_blood_pressure == 1) return "red";
+            return "#F5ECCD";
+        });
+    //then, points travel to their location on the x axis
+    sheet3.selectAll("circle")
+        .transition()
+        .delay(function(d,i) {return(i*2)})
+        .duration(1500)
+        .attr("cx", function (d) { return xScale(d.serum_sodium)});
+
+
+    //end third chart
+
     //FOURTH CHART
     xScale = d3.scaleLinear().domain([0,100]).range([0,width]);
     yScale = d3.scaleLinear().domain([0,100]).range([height, 0]);
@@ -167,8 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener("click", function() {
             let n = button.value;
             console.log(button.value, sheetnames[button.value]);
-            d3.select(sheetnames[curr_page]).style("opacity",0);
-            d3.select(sheetnames[n]).style("opacity", 1);
+            d3.select(sheetnames[curr_page]).style("display","none");
+            d3.select(sheetnames[n]).style("display", "block");
             curr_page = n;
             console.log(curr_page);
             document.querySelector("#displaydiv").innerHtml = document.querySelector(sheetnames[n]).innerHtml;
