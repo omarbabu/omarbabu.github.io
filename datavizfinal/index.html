@@ -3,7 +3,7 @@
         <div align=center style="size: 30px; margin-top: 20px; margin-bottom: 20px; font-size: 30px;">Tendencies Revealed Through Visualizing Health Data</div>
         <div align=center>
             <div style="background-color: black;"><button class="sheetswitch id="prevSheet" value="-1">Previous</button><button class="sheetswitch" id="nextSheet" value="1">Next</button></div>
-            <div style="background-color: #7D80DA;" >
+            <div style="background-color: #7D80DA;" id="toggleDiseaseDiv">
                 <!-- <button class="sheetswitch" id = "toSheet1" value="0">Blood Glucose Gap</button> -->
                 <!-- <button class="sheetswitch" id = "toSheet2" value="1">Prevalence of Disease Around the Gap</button> -->
                 <button id="showDiseases">Show Diseases</button>
@@ -16,7 +16,7 @@
                 </div>
                 
                 <!-- <button class="sheetswitch" id = "toSheet4" value="3">New Criteria for Disease Risk</button> -->
-                <div style="color:white;">
+                <div style="color:white;" id="customAxesDiv" >
                     <tr>
                         <td >X Axis Field <select id = "xField" ></select></td>
                         <td>Y Axis Field<select id="yField" color="white"> </select></td>

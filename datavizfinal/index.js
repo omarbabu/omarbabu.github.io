@@ -372,6 +372,7 @@ d3.csv("heart_failure_clinical_records_dataset.csv").then(function (data) {
 });
 //BUTTONS
 document.addEventListener('DOMContentLoaded', function () {
+    d3.select('#customAxesDiv').style("display", "none");
     var buttons = document.querySelectorAll(".sheetswitch");
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -385,14 +386,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             console.log(sheetnames[curr_page])
             d3.select(sheetnames[curr_page]).style("display", "block");
-
-            // let n = button.value;
-            // console.log(button.value, sheetnames[button.value]);
-            // d3.select(sheetnames[curr_page]).style("display", "none");
-            // d3.select(sheetnames[n]).style("display", "block");
-            // curr_page = n;
-            // console.log(curr_page);
-            // document.querySelector("#displaydiv").innerHtml = document.querySelector(sheetnames[n]).innerHtml;
+            if (curr_page == 0) {
+                d3.select('#toggleDiseaseDiv').style("display", "block");
+            } else if (curr_page == 2) {
+                d3.select('#customAxesDiv').style("display", "block");
+            } else {
+                d3.select('#toggleDiseaseDiv').style("display", "none");
+                d3.select('#customAxesDiv').style("display", "none");
+            }
         });
         // button.click();
     });
