@@ -87,7 +87,7 @@ d3.csv("full_data.csv").then(function (data) {
             // else if (d.hypertension == 1) return "#1B065E";
             else return "#F5ECCD";
         })
-        .style("opacity", 0.8);
+        .style("opacity", 0.5);
     sheet1.append("g").append("line").attr("x1", 0).attr("x2", width).attr("y1", yScale(140)).attr("y2", yScale(140)).attr("stroke", "black").style("opacity", 0.5);
 
     //then, points travel to their location on the x axis
@@ -157,8 +157,8 @@ function showDiseases() {
             else return this.style.fill;
         })
         .attr("r", function (d) {
-            if (d.heart_disease == 1 || d.hypertension == 1) return 10;
-            else return this.attr.fill;
+            if (d.heart_disease == 1 || d.hypertension == 1) return 3;
+            else return 2;
         });
 }
 function hideDiseases() {
@@ -179,14 +179,14 @@ document.querySelector("#hideDiseases").addEventListener("click", hideDiseases);
 d3.csv("heart_failure_clinical_records_dataset.csv").then(function (data) {
 
     //THIRD CHART
-    xScale = d3.scaleLinear().domain([25000, 700000]).range([0, width]);
+    xScale = d3.scaleLinear().domain([20,100]).range([0, width]);
     yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]);
     sheet4.append("g").call(d3.axisLeft(yScale));
     sheet4.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate(" + 0 + ", " + height + ")");
     //initially, color by court surface and plot in a line
     sheet4.append("g").selectAll("dot").data(data).enter().append("circle")
         .attr("cx", function (d, i) { return width })
-        .attr("cy", function (d) { return yScale(d.serum_creatinine) })
+        .attr("cy", function (d) { return yScale(d.ejection_fraction) })
         .attr("r", 2)
         .style("fill", function (d) {
             // var smoke = d.smoking_status;
@@ -202,7 +202,7 @@ d3.csv("heart_failure_clinical_records_dataset.csv").then(function (data) {
         .transition()
         .delay(function (d, i) { return (i * 2) })
         .duration(2000)
-        .attr("cx", function (d) { return xScale(d.platelets) });
+        .attr("cx", function (d) { return xScale(d.age) });
 
     // List of groups (here I have one group per column)
     var fields = ["age",  "ejection_fraction", "platelets", "serum_creatinine", "serum_sodium", "time"]
