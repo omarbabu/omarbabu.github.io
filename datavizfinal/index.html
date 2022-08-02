@@ -9,9 +9,21 @@
                 <button id="hideDiseases">Hide Diseases</button>
 
             </div>
-            <div style="background-color: blue;">
-                <button class="sheetswitch" id = "toSheet3" value="2">Dangers of High Creatinine</button>
+            <div style="background-color: rgb(76, 0, 255);">
+                <div>                <button class="sheetswitch" id = "toSheet3" value="2">Ejection Fraction Rates</button>
+                </div>
+                
                 <button class="sheetswitch" id = "toSheet4" value="3">New Criteria for Disease Risk</button>
+                <div>
+                    <tr>
+                        <td>X AxisField <select id = "xField">X Axis Field</select></td>
+                        <td>Y Axis Field<select id="yField">Y Axis Field</select></td>
+                        <td>Color Field<select id="cField">Color Field</select></td>
+                    </tr>
+                    
+                
+                </div>
+                
             </div>
             
         </div>
@@ -20,9 +32,10 @@
         <div justify:center>
             <div padding-left:10></div>
             <div id = "sheet1" align=center>
-                <div style="margin-left:100px; margin-right:100px; margin-top: 50px; margin-bottom: 20px">This graph plots patients' blood glucose levels with respect to their age.
-                    We can see that the red and blue points, denoting heart disease and hyptertension respectively, are more prevalent in older patients.
-                    However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
+                <div style="margin-left:100px; margin-right:100px; margin-top: 50px; margin-bottom: 20px">Here we see patients' blood glucose (y axis) with respect to their age (x axis).
+                    Do you see the large gap on the right side of the graph?
+                    This interesting gap has a huge concentration of diseases right on its edges. Click "Show Diseases" to see... 
+                </div>
                 
             </div>
             <!-- <div id = "sheet2" style="display:none" align=center >
@@ -30,6 +43,7 @@
                     We can see that the red and blue points, denoting heart disease and hyptertension respectively, are more prevalent in older patients.
                     However, these patients' bmi's are for the most part near the median bmi for their age gropus.</div>
             </div> -->
+
             <div id = "sheet3" style="display:none" align=center display:none></div>
             <div id = "sheet4" style="display:none" align=center display:none></div>
         </div>
