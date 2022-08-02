@@ -5,7 +5,7 @@ var curr_page = 0;
 var width = window.innerWidth / 2;
 var height = 450;
 var margin = 40;
-const sheetnames = ["#sheet1", "#sheet2", "#sheet3", "#sheet4"]
+const sheetnames = ["#sheet1", "#sheet3", "#sheet4"]
 const sheet1 = d3.select("#sheet1")
     .append("svg")
     .attr("width", width + 2 * margin)
@@ -375,13 +375,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var buttons = document.querySelectorAll(".sheetswitch");
     buttons.forEach(button => {
         button.addEventListener("click", function () {
-            let n = button.value;
-            console.log(button.value, sheetnames[button.value]);
             d3.select(sheetnames[curr_page]).style("display", "none");
-            d3.select(sheetnames[n]).style("display", "block");
-            curr_page = n;
-            console.log(curr_page);
-            document.querySelector("#displaydiv").innerHtml = document.querySelector(sheetnames[n]).innerHtml;
+            if (button.value == 1) {
+                curr_page += 1;
+                if (curr_page > 2) curr_page = 2;
+            } else {
+                curr_page -= 1;
+                if (curr_page < 0) curr_page = 0;
+            }
+            console.log(sheetnames[curr_page])
+            d3.select(sheetnames[curr_page]).style("display", "block");
+
+            // let n = button.value;
+            // console.log(button.value, sheetnames[button.value]);
+            // d3.select(sheetnames[curr_page]).style("display", "none");
+            // d3.select(sheetnames[n]).style("display", "block");
+            // curr_page = n;
+            // console.log(curr_page);
+            // document.querySelector("#displaydiv").innerHtml = document.querySelector(sheetnames[n]).innerHtml;
         });
         // button.click();
     });
