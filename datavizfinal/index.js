@@ -133,7 +133,7 @@ d3.csv("full_data.csv").then(function (data) {
     ]
     // Add annotation to the chart
     const makeAnnotations = d3.annotation()
-        .annotations(annotations).type(d3.annotationCalloutCircle)
+        .annotations(annotations).type(d3.annotationCalloutCircle);
     sheet1
         .append("g")
         .call(makeAnnotations)
@@ -154,10 +154,11 @@ function showDiseases() {
         .style("fill", function (d) {
             if (d.heart_disease == 1) return "red";
             else if (d.hypertension == 1) return "orange";
+            else if (d.stroke == 1) return "yellow";
             else return this.style.fill;
         })
         .attr("r", function (d) {
-            if (d.heart_disease == 1 || d.hypertension == 1) return 3;
+            if (d.heart_disease == 1 || d.hypertension == 1 || d.stroke == 1) return 3;
             else return 2;
         });
 }
@@ -360,6 +361,7 @@ d3.csv("heart_failure_clinical_records_dataset.csv").then(function (data) {
     sheet3.append("g").append("line").attr("x1", 0).attr("x2", width).attr("y1", yScale(50)).attr("y2", yScale(50)).attr("stroke", "black").style("opacity", 0.5);
     sheet3.append("g").append("line").attr("x1", 0).attr("x2", width).attr("y1", yScale(41)).attr("y2", yScale(41)).attr("stroke", "black").style("opacity", 0.5);
 
+    
     //then, points travel to their location on the x axis
     sheet3.selectAll("circle")
         .transition()
@@ -368,6 +370,49 @@ d3.csv("heart_failure_clinical_records_dataset.csv").then(function (data) {
         .attr("cx", function (d) { return xScale(d.age) });
     //end fourth chart
 
+    const annotations = [
+        {
+            note: {
+                // label: "Upper End: 75%",
+                title: "75% Normal"
+            },
+            x: xScale(20),
+            y: yScale(75),
+            dy: 20,
+            dx: 40
+        },
+        {
+            note: {
+                // label: "50%",
+                title: "50% Normal / Borderline"
+            },
+            x: xScale(25),
+            y: yScale(50),
+            dy: -20,
+            dx: 30
+        },
+        {
+            note: {
+                // label: "Lower End: 41%",
+                title: "41% Borderline"
+            },
+            x: xScale(30),
+            y: yScale(41),
+            dy: 10,
+            dx: 30
+        }
+    ]
+    // Add annotation to the chart
+    makeAnnotations = d3.annotation()
+        .annotations(annotations).type(d3.annotationCalloutCircle)
+    sheet3
+        .append("g")
+        .call(makeAnnotations)
+        .on('subjectover', function (annotation) {
+            annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", false);
+        }).on('subjectout', function (annotation) {
+            annotation.type.a.selectAll("g.annotation-connector, g.annotation-note").classed("hidden", true);
+        });
 
 });
 //BUTTONS
