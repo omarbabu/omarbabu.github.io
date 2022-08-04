@@ -123,10 +123,20 @@ d3.csv("full_data.csv").then(function (data) {
         {
             note: {
                 label: "Hypertension",
-                title: "Yellow"
+                title: "Orange"
             },
             x: xScale(42),
             y: yScale(77),
+            dy: 10,
+            dx: 30
+        },
+        {
+            note: {
+                label: "Stroke",
+                title: "Yellow"
+            },
+            x: xScale(56),
+            y: yScale(188),
             dy: 10,
             dx: 30
         }
@@ -152,7 +162,7 @@ function showDiseases() {
         .transition()
         .duration(1500)
         .style("fill", function (d) {
-            if (d.heart_disease == 1) return "#7D80DA";
+            if (d.heart_disease == 1) return "red";
             else if (d.hypertension == 1) return "orange";
             else if (d.stroke == 1) return "yellow";
             else return this.style.fill;
