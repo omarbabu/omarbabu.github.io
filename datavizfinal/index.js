@@ -56,7 +56,7 @@ d3.csv("full_data.csv").then(function (data) {
     //     })
     //     .style("opacity", 0.8);
 
-    sheet2.append("g").append("line").attr("x1", 0).attr("x2", width).attr("y1", yScale(140)).attr("y2", yScale(140)).attr("stroke", "black").style("opacity", 0.5);
+    // sheet2.append("g").append("line").attr("x1", 0).attr("x2", width).attr("y1", yScale(140)).attr("y2", yScale(140)).attr("stroke", "black").style("opacity", 0.5);
 
     //then, points travel to their location on the x axis
     // sheet2.selectAll("circle")
@@ -152,7 +152,7 @@ function showDiseases() {
         .transition()
         .duration(1500)
         .style("fill", function (d) {
-            if (d.heart_disease == 1) return "red";
+            if (d.heart_disease == 1) return "#7D80DA";
             else if (d.hypertension == 1) return "orange";
             else if (d.stroke == 1) return "yellow";
             else return this.style.fill;
